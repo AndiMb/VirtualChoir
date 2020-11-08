@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+AutoUpdate-Show-In-Client: true
+OpenIDE-Module: de.oscvev.virtualchoir.core/1
+OpenIDE-Module-Layer: de/oscvev/virtualchoir/core/layer.xml
+OpenIDE-Module-Localizing-Bundle: de/oscvev/virtualchoir/core/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

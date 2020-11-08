@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+AutoUpdate-Show-In-Client: true
+OpenIDE-Module: de.oscvev.virtualchoir.voices
+OpenIDE-Module-Localizing-Bundle: de/oscvev/virtualchoir/voices/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

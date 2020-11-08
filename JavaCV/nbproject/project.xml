@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.modules.apisupport.project</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/nb-module-project/3">
+            <code-name-base>org.bytedeco.javacv</code-name-base>
+            <suite-component/>
+            <module-dependencies/>
+            <public-packages>
+                <package>cl.eye</package>
+                <package>org.bytedeco.javacv</package>
+            </public-packages>
+            <class-path-extension>
+                <runtime-relative-path>ext/ffmpeg-windows-x86_64.jar</runtime-relative-path>
+                <binary-origin>C:\Users\Andreas\Documents\NetBeansProjects\VirtualChoir\JavaCV\release\modules\ext\ffmpeg-windows-x86_64.jar</binary-origin>
+            </class-path-extension>
+            <class-path-extension>
+                <runtime-relative-path>ext/ffmpeg.jar</runtime-relative-path>
+                <binary-origin>C:\Users\Andreas\Documents\NetBeansProjects\VirtualChoir\JavaCV\release\modules\ext\ffmpeg.jar</binary-origin>
+            </class-path-extension>
+            <class-path-extension>
+                <runtime-relative-path>ext/javacpp-windows-x86_64.jar</runtime-relative-path>
+                <binary-origin>C:\Users\Andreas\Documents\NetBeansProjects\VirtualChoir\JavaCV\release\modules\ext\javacpp-windows-x86_64.jar</binary-origin>
+            </class-path-extension>
+            <class-path-extension>
+                <runtime-relative-path>ext/javacv-platform.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/javacv-platform.jar</binary-origin>
+            </class-path-extension>
+            <class-path-extension>
+                <runtime-relative-path>ext/javacv.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/javacv.jar</binary-origin>
+            </class-path-extension>
+            <class-path-extension>
+                <runtime-relative-path>ext/ffmpeg-platform.jar</runtime-relative-path>
+                <binary-origin>C:\Users\Andreas\Documents\NetBeansProjects\VirtualChoir\JavaCV\release\modules\ext\ffmpeg-platform.jar</binary-origin>
+            </class-path-extension>
+            <class-path-extension>
+                <runtime-relative-path>ext/javacpp-platform.jar</runtime-relative-path>
+                <binary-origin>C:\Users\Andreas\Documents\NetBeansProjects\VirtualChoir\JavaCV\release\modules\ext\javacpp-platform.jar</binary-origin>
+            </class-path-extension>
+            <class-path-extension>
+                <runtime-relative-path>ext/javacpp.jar</runtime-relative-path>
+                <binary-origin>C:\Users\Andreas\Documents\NetBeansProjects\VirtualChoir\JavaCV\release\modules\ext\javacpp.jar</binary-origin>
+            </class-path-extension>
+        </data>
+    </configuration>
+</project>

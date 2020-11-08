@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+AutoUpdate-Show-In-Client: true
+OpenIDE-Module: de.oscvev.virtualchoir.praat/6
+OpenIDE-Module-Localizing-Bundle: de/oscvev/virtualchoir/praat/Bundle.properties
+OpenIDE-Module-Specification-Version: 6.1.30
+

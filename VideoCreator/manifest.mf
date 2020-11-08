@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+AutoUpdate-Show-In-Client: true
+OpenIDE-Module: de.oscvev.virtualchoir.videocreator
+OpenIDE-Module-Localizing-Bundle: de/oscvev/virtualchoir/videocreator/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+

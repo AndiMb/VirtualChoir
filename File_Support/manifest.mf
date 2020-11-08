@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+AutoUpdate-Show-In-Client: true
+OpenIDE-Module: de.oscvev.virtualchoir.filesupport
+OpenIDE-Module-Install: de/oscvev/virtualchoir/filesupport/Installer.class
+OpenIDE-Module-Localizing-Bundle: de/oscvev/virtualchoir/filesupport/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+
