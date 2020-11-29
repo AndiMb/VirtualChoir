@@ -38,7 +38,7 @@ public class VideoUtilities {
     private String praatPath;
     private String tempPath;
     
-    private boolean nativeOutput = false;
+    private boolean nativeOutput = true;
 
     public VideoUtilities(String workingDirectory) {
         setWorkingDirectory(workingDirectory);
@@ -102,8 +102,14 @@ public class VideoUtilities {
         io.getOut().close();
         return wavFilePath;
     }
+    
+    public static final int PRAAT_RETURN_OFFSETMAX = 0;
+    public static final int PRAAT_RETURN_OFFSETMIN = 1;
+    public static final int PRAAT_RETURN_VALUEMAX = 2;
+    public static final int PRAAT_RETURN_VALUEMIN = 3;
+    public static final int PRAAT_RETURN_VALUEABSMAX = 4;
 
-    public double getOffsetFromWave(Path wavFile1, Path wavFile2, double startTime, double duration) {
+    public double correlateWaves(Path wavFile1, Path wavFile2, double startTime, double duration, int returnValue) {
         if (!checkPrerequisites() || wavFile1 == null || wavFile2 == null) {
             return Double.NaN;
         }
@@ -155,8 +161,8 @@ public class VideoUtilities {
                 "/c",
                 praatPath + " "
                 + praatScriptPath + " "
-                + wavFile1.toString() + " "
-                + wavFile2.toString() + " "
+                + "\"" + wavFile1.toString() + "\" "
+                + "\"" + wavFile2.toString() + "\" "
                 + Double.toString(startTime) + " "
                 + Double.toString(startTime + duration));
         builder.redirectErrorStream(true);
@@ -189,7 +195,20 @@ public class VideoUtilities {
             System.err.format("IOException: %s%n", x);
         }
         
-        offset = offsetMax;
+        switch(returnValue){
+            case PRAAT_RETURN_OFFSETMAX:
+                offset = offsetMax; break;
+            case PRAAT_RETURN_OFFSETMIN:
+                offset = offsetMin; break;
+            case PRAAT_RETURN_VALUEMAX:
+                offset = valueMax; break;
+            case PRAAT_RETURN_VALUEMIN:
+                offset = valueMin; break;
+            case PRAAT_RETURN_VALUEABSMAX:
+                offset = Math.max(Math.abs(valueMax), Math.abs(valueMin)); break;
+            default:
+                offset = offsetMax; break;
+        }
         
         io.getOut().close();
 
@@ -419,7 +438,8 @@ public class VideoUtilities {
                 "-t", Double.toString(duration),
                 "-preset", "slow",
                 "-an",
-                "-codec:v", "libx264",
+                //"-codec:v", "libx264",
+                "-codec:v", "h264_nvenc",
                 "-pix_fmt", "yuv420p",
                 "-r", "30.00",
                 "-vf", "scale=" + Integer.toString(width) + ":" + Integer.toString(height) + ":force_original_aspect_ratio=increase,crop=" + Integer.toString(width) + ":" + Integer.toString(height),
@@ -543,6 +563,7 @@ public class VideoUtilities {
         
         List<String> commandList = new ArrayList<>();
         commandList.add(ffmpegPath);
+        commandList.add("-y");
         for (Path file : audioFiles){
             commandList.add("-i");
             commandList.add(file.toString());

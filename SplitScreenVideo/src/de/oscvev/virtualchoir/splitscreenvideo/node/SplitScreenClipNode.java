@@ -9,8 +9,11 @@ import de.oscvev.virtualchoir.splitscreenvideo.SplitScreenClip;
 import java.awt.Image;
 import org.openide.nodes.AbstractNode;
 import org.openide.nodes.Children;
+import org.openide.nodes.PropertySupport;
 import org.openide.nodes.Sheet;
+import org.openide.util.Exceptions;
 import org.openide.util.ImageUtilities;
+import org.openide.util.NbBundle;
 import org.openide.util.lookup.Lookups;
 
 /**
@@ -26,6 +29,35 @@ public class SplitScreenClipNode extends AbstractNode {
     @Override
     protected Sheet createSheet() {
         Sheet sheet = super.createSheet();
+        
+        SplitScreenClip clip = this.getLookup().lookup(SplitScreenClip.class);
+        
+        Sheet.Set generalProp = Sheet.createPropertiesSet();
+        generalProp.setName("GeneralProperties");
+        generalProp.setDisplayName(NbBundle.getMessage(SplitScreenClipNode.class, "SplitScreenClipNode.GeneralProperties"));
+
+        try {
+            PropertySupport.Reflection<String> nameProp = new PropertySupport.Reflection<>(clip, String.class, SplitScreenClip.PROP_NAME);
+            nameProp.setDisplayName(NbBundle.getMessage(SplitScreenClipNode.class, "SplitScreenClipNode.Name"));
+            generalProp.put(nameProp);
+            
+            PropertySupport.Reflection<Boolean> useVideoProp = new PropertySupport.Reflection<>(clip, boolean.class, SplitScreenClip.PROP_USEVIDEO);
+            useVideoProp.setDisplayName(NbBundle.getMessage(SplitScreenClipNode.class, "SplitScreenClipNode.UseVideo"));
+            generalProp.put(useVideoProp);
+            
+            PropertySupport.Reflection<Boolean> useAudioProp = new PropertySupport.Reflection<>(clip, boolean.class, SplitScreenClip.PROP_USEAUDIO);
+            useAudioProp.setDisplayName(NbBundle.getMessage(SplitScreenClipNode.class, "SplitScreenClipNode.UseAudio"));
+            generalProp.put(useAudioProp);
+            
+            PropertySupport.Reflection<Double> corrCoeffProp = new PropertySupport.Reflection<>(clip, double.class, SplitScreenClip.PROP_CORRELATIONCOEFFICIENT);
+            corrCoeffProp.setDisplayName(NbBundle.getMessage(SplitScreenClipNode.class, "SplitScreenClipNode.corrcoeff"));
+            generalProp.put(corrCoeffProp);
+            
+        } catch (NoSuchMethodException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+
+        sheet.put(generalProp);
         
         return sheet;
     }

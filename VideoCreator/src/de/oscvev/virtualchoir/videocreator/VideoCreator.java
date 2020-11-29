@@ -26,12 +26,16 @@ import org.openide.util.Exceptions;
  */
 public class VideoCreator extends Thread {
     
+    private static final int SplitScreenVideoWidth = 1920;
+    private static final int SplitScreenVideoHeight = 1080;
     
     private final VirtualChoir virtualChoir;
     private String workingDirectory;
     
     private int clipHeight = -1;
     private int clipWidth = -1;
+    
+    private DefaultSplitScreenVideo splitScreenVideo = null;
 
     public VideoCreator(VirtualChoir virtualChoir, String workingDirectory) {
         this.virtualChoir = virtualChoir;
@@ -53,23 +57,38 @@ public class VideoCreator extends Thread {
     public void setClipWidth(int clipWidth) {
         this.clipWidth = clipWidth;
     }
+
+    public DefaultSplitScreenVideo getSplitScreenVideo() {
+        return splitScreenVideo;
+    }
+
+    public void setSplitScreenVideo(DefaultSplitScreenVideo splitScreenVideo) {
+        this.splitScreenVideo = splitScreenVideo;
+    }
  
     @Override
     public void run() {
+        VideoUtilities vUtils = new VideoUtilities(workingDirectory);
         try {
-            createVideo();
+            if (splitScreenVideo == null){
+                splitScreenVideo = createVideo(vUtils);
+            }
+            if (splitScreenVideo != null){
+                createSplitScreenVideo(splitScreenVideo, vUtils);
+            }
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }
     }
     
-    private void createVideo(){        
+    private DefaultSplitScreenVideo createVideo(VideoUtilities vUtils){        
         final ProgressHandle progr = ProgressHandle.createHandle("Create Video");
-        VideoUtilities vUtils = new VideoUtilities(workingDirectory);
         
         
         DefaultSplitScreenVideo splitScreenVideo = new DefaultSplitScreenVideo(UUID.randomUUID().toString(), "SplitScreenVideo", virtualChoir, true);
+        splitScreenVideo.setWorkingDirectory(workingDirectory);
         virtualChoir.addVideo(splitScreenVideo);
+        
         
         ArrayList<VirtualChoirVoice> voices = virtualChoir.getVoices();
         
@@ -78,23 +97,21 @@ public class VideoCreator extends Thread {
             totalClipCount += ((DefaultVoice)vv).getVideoFiles().size();
         }
         progr.start(totalClipCount);
-        ArrayList<Path> audioFiles = new ArrayList<>(totalClipCount);
         
         int videosPerSide = (int)(Math.sqrt(totalClipCount) - 0.01) + 1;
         
-        int subClipWidth = (int)(1920.0 / (double)videosPerSide);
-        int subClipHeight = (int)(1080.0 / (double)videosPerSide);
+        int subClipWidth = (int)(SplitScreenVideoWidth / (double)videosPerSide);
+        int subClipHeight = (int)(SplitScreenVideoHeight / (double)videosPerSide);
         
         int singleClipWidth = clipWidth < 1 ? subClipWidth : clipWidth;
         int singleClipHeight = clipHeight < 1 ? subClipHeight : clipHeight;
         
         int numberOfProcessedClips = 0;
-        ArrayList<Path> videoClips = new ArrayList<>();
         for (VirtualChoirVoice vv : voices) {
             DefaultVoice voice = (DefaultVoice)vv;
             VirtualChoirVideoClip master = voice.getMasterFile();
             if (master == null) {
-                return;
+                return null;
             }
             Path masterPath = voice.getMasterFile().getPath();
 
@@ -104,7 +121,7 @@ public class VideoCreator extends Thread {
 
             for (VirtualChoirVideoClip clip : voice.getVideoFiles()) {
                 Path clipWav = vUtils.extactOneAudioChannel(clip.getPath());
-                double offset = vUtils.getOffsetFromWave(masterWave, clipWav, master.getStartTime(), master.getEndTime());
+                double offset = vUtils.correlateWaves(masterWave, clipWav, master.getStartTime(), master.getEndTime(), VideoUtilities.PRAAT_RETURN_OFFSETMAX);
                 clip.setOffset(offset);
                 
                 Path clipWavWithoutOffset = vUtils.removeOffsetFromWave(clipWav, clip.getOffset());
@@ -124,16 +141,18 @@ public class VideoCreator extends Thread {
                 }
                 
                 vUtils.normalizeAudio(clipWav);
-                audioFiles.add(clipWav);
+                
+                double corrCoeff = vUtils.correlateWaves(masterWave, clipWav, master.getStartTime(), master.getEndTime(), VideoUtilities.PRAAT_RETURN_VALUEABSMAX);
                 
                 Path clipVidTrimmed = vUtils.trimVideo(clip.getPath(), startOffset+clip.getOffset(), duration, singleClipWidth, singleClipHeight);
-                videoClips.add(clipVidTrimmed);
                 
                 SplitScreenClip ssClip = new SplitScreenClip(UUID.randomUUID().toString(), clipVidTrimmed.toString(), virtualChoir, true);
-                ssClip.setAudioFile(clipWavTrimmed);
+                ssClip.setAudioFile(clipWav);
                 ssClip.setVideoFile(clipVidTrimmed);
                 ssClip.setUseAudio(true);
                 ssClip.setUseVideo(true);
+                ssClip.setMasterfile(masterPath);
+                ssClip.setCorrelationCoefficient(corrCoeff);
                 String clipHash = "" + 
                         clip.getUUID() + ":" +
                         clip.getOffset() + ":" +
@@ -147,14 +166,55 @@ public class VideoCreator extends Thread {
                 progr.progress(numberOfProcessedClips++);
             }
         }
-        Path mixedAudioFile = vUtils.mix_audios(audioFiles);
-        Path videoFile = vUtils.createSplitScreen(videoClips, subClipHeight, videosPerSide);
-        Path videoAudioFile = vUtils.mergeAudioVideo(videoFile, mixedAudioFile);
         
-        splitScreenVideo.setAudioPath(mixedAudioFile);
-        splitScreenVideo.setVideoPath(videoFile);
-        splitScreenVideo.setAudioVideoPath(videoAudioFile);
+        createSplitScreenVideo(splitScreenVideo, vUtils);
         
         progr.finish();
+        
+        return splitScreenVideo;
+    }
+    
+    private void createSplitScreenVideo(DefaultSplitScreenVideo splitScreenVideo, VideoUtilities vUtils){
+        
+        int totalVideoClipCount = 0;
+        int totalAudioFileCount = 0;
+        for (SplitScreenClip ssc : splitScreenVideo.getClips()) {
+            if (ssc.isUseAudio() && Files.exists(ssc.getAudioFile())){
+                totalAudioFileCount++;
+            }
+            if (ssc.isUseVideo() && Files.exists(ssc.getVideoFile())){
+                totalVideoClipCount++;
+            }
+        }
+        
+        ArrayList<Path> videoClips = new ArrayList<>(totalVideoClipCount);
+        ArrayList<Path> audioFiles = new ArrayList<>(totalAudioFileCount);
+        
+        for (SplitScreenClip ssc : splitScreenVideo.getClips()){
+            if (ssc.isUseAudio()){
+                audioFiles.add(ssc.getAudioFile());
+            }
+            if (ssc.isUseVideo()){
+                videoClips.add(ssc.getVideoFile());
+            }
+        }
+        
+        int videosPerSide = (int)(Math.sqrt(totalVideoClipCount) - 0.01) + 1;
+        
+        int subClipHeight = (int)(SplitScreenVideoHeight / (double)videosPerSide);
+        
+        if (subClipHeight % 2 != 0){
+            subClipHeight--;
+        }
+        
+        Path mixedAudioFile = vUtils.mix_audios(audioFiles);
+        splitScreenVideo.setAudioPath(mixedAudioFile);
+        
+        Path videoFile = vUtils.createSplitScreen(videoClips, subClipHeight, videosPerSide);
+        splitScreenVideo.setVideoPath(videoFile);
+        
+        Path videoAudioFile = vUtils.mergeAudioVideo(videoFile, mixedAudioFile);
+        splitScreenVideo.setAudioVideoPath(videoAudioFile);
+        
     }
 }

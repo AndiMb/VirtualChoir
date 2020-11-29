@@ -22,12 +22,14 @@ public class DefaultSplitScreenVideo extends VirtualChoirVideo implements VideoP
     public static final String PROP_VIDEOPATH = "videoPath";
     public static final String PROP_AUDIOPATH = "audioPath";
     public static final String PROP_AUDIOVIDEOPATH = "audioVideoPath";
+    public static final String PROP_WORKINGDIRECTORY = "workingDirectory";
 
     private final ArrayList<SplitScreenClip> clips = new ArrayList<>();
     private Path videoPath;
     private Path audioPath;
     private Path audioVideoPath;
-
+    private String workingDirectory;
+   
     public DefaultSplitScreenVideo(String uuid, String name, VirtualChoir vChoir, boolean addToLookup) {
         super(uuid, name, vChoir, addToLookup);
     }
@@ -84,5 +86,15 @@ public class DefaultSplitScreenVideo extends VirtualChoirVideo implements VideoP
     @Override
     public Path getVideoClipPath() {
         return audioVideoPath;
+    }   
+    
+    public String getWorkingDirectory() {
+        return workingDirectory;
+    }
+
+    public void setWorkingDirectory(String workingDirectory) {
+        String oldWorkingDirectory = this.workingDirectory;
+        this.workingDirectory = workingDirectory;
+        firePropertyChange(PROP_WORKINGDIRECTORY, oldWorkingDirectory, workingDirectory);
     }
 }

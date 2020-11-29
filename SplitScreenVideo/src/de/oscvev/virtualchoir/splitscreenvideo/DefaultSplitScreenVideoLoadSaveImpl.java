@@ -34,6 +34,7 @@ public class DefaultSplitScreenVideoLoadSaveImpl extends VirtualChoirVideoLoadSa
         String audioPathStr = this.getTagValue(DefaultSplitScreenVideo.PROP_AUDIOPATH, rootElement);
         String videoPathStr = this.getTagValue(DefaultSplitScreenVideo.PROP_VIDEOPATH, rootElement);
         String audioVideoPathStr = this.getTagValue(DefaultSplitScreenVideo.PROP_AUDIOVIDEOPATH, rootElement);
+        String workingDirString = this.getTagValue(DefaultSplitScreenVideo.PROP_WORKINGDIRECTORY, rootElement);
         
         if (!audioPathStr.equals("null") || (new File(audioPathStr)).exists() ){
             dVideo.setAudioPath(Paths.get(audioPathStr));
@@ -43,6 +44,9 @@ public class DefaultSplitScreenVideoLoadSaveImpl extends VirtualChoirVideoLoadSa
         }
         if (!audioVideoPathStr.equals("null") || (new File(audioVideoPathStr)).exists() ){
             dVideo.setAudioVideoPath(Paths.get(audioVideoPathStr));
+        }
+        if (!workingDirString.equals("null")){
+            dVideo.setWorkingDirectory(workingDirString);
         }
         
         org.w3c.dom.Node clipsNode = rootElement.getElementsByTagName("clips").item(0);
@@ -63,6 +67,14 @@ public class DefaultSplitScreenVideoLoadSaveImpl extends VirtualChoirVideoLoadSa
                         boolean useAudio = Boolean.parseBoolean(getTagValue(SplitScreenClip.PROP_USEAUDIO, clipElement));
                         boolean useVideo = Boolean.parseBoolean(getTagValue(SplitScreenClip.PROP_USEVIDEO, clipElement));
                         String clipHash = getTagValue(SplitScreenClip.PROP_CLIPHASH, clipElement);
+                        String masterFileStr = getTagValue(SplitScreenClip.PROP_MASTERFILE, clipElement);
+                        String dblString = getTagValue(SplitScreenClip.PROP_CORRELATIONCOEFFICIENT, clipElement);
+                        double correlationCoefficient = 0.0;
+                        if (dblString != null){
+                            correlationCoefficient = Double.parseDouble(getTagValue(SplitScreenClip.PROP_CORRELATIONCOEFFICIENT, clipElement));
+                        }else{
+                            System.out.println(name);
+                        }
                         
                         Path audioFile = null;
                         if ((new File(audioFileStr)).exists()){
@@ -72,6 +84,10 @@ public class DefaultSplitScreenVideoLoadSaveImpl extends VirtualChoirVideoLoadSa
                         if ((new File(videoFileStr)).exists()){
                             videoFile = Paths.get(videoFileStr);
                         }
+                        Path masterFile = null;
+                        if ((new File(masterFileStr)).exists()){
+                            masterFile = Paths.get(masterFileStr);
+                        }
                         
                         if (audioFile != null || videoFile != null){
                             SplitScreenClip clip = new SplitScreenClip(uuid, name, vChoir, true);
@@ -80,6 +96,8 @@ public class DefaultSplitScreenVideoLoadSaveImpl extends VirtualChoirVideoLoadSa
                             clip.setClipHash(clipHash);
                             clip.setUseAudio(useAudio && audioFile != null);
                             clip.setUseVideo(useVideo && videoFile != null);
+                            clip.setMasterfile(masterFile);
+                            clip.setCorrelationCoefficient(correlationCoefficient);
                             dVideo.addClip(clip);
                         }
                     }
@@ -96,6 +114,7 @@ public class DefaultSplitScreenVideoLoadSaveImpl extends VirtualChoirVideoLoadSa
             addValue(doc, DefaultSplitScreenVideo.PROP_AUDIOPATH, dVideo.getAudioPath() == null ? "null" : dVideo.getAudioPath().toString(), rootElement);
             addValue(doc, DefaultSplitScreenVideo.PROP_VIDEOPATH, dVideo.getVideoPath() == null ? "null" : dVideo.getVideoPath().toString(), rootElement);
             addValue(doc, DefaultSplitScreenVideo.PROP_AUDIOVIDEOPATH, dVideo.getAudioVideoPath() == null ? "null" : dVideo.getAudioVideoPath().toString(), rootElement);
+            addValue(doc, DefaultSplitScreenVideo.PROP_WORKINGDIRECTORY, dVideo.getWorkingDirectory() == null ? "null" : dVideo.getWorkingDirectory(), rootElement);
             Element clipsElem = doc.createElement("clips");
             for (SplitScreenClip clip : dVideo.getClips()){
                 Element clipElem = doc.createElement("clip");
@@ -113,6 +132,8 @@ public class DefaultSplitScreenVideoLoadSaveImpl extends VirtualChoirVideoLoadSa
                 addValue(doc, SplitScreenClip.PROP_USEAUDIO, Boolean.toString(clip.isUseAudio()), clipElem);
                 addValue(doc, SplitScreenClip.PROP_USEVIDEO, Boolean.toString(clip.isUseVideo()), clipElem);
                 addValue(doc, SplitScreenClip.PROP_CLIPHASH, clip.getClipHash(), clipElem);
+                addValue(doc, SplitScreenClip.PROP_MASTERFILE, clip.getMasterfile().toString(), clipElem);
+                addValue(doc, SplitScreenClip.PROP_CORRELATIONCOEFFICIENT, Double.toString(clip.getCorrelationCoefficient()), clipElem);
                 clipsElem.appendChild(clipElem);
             }
             rootElement.appendChild(clipsElem);
