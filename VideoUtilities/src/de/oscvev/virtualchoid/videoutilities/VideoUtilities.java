@@ -154,7 +154,20 @@ public class VideoUtilities {
         }
 
         InputOutput io = IOProvider.getDefault().getIO("Videoprocessing", false);
-        io.getOut().println("Determine offset of " + wavFile2.toString() + "...");
+        switch(returnValue){
+            case PRAAT_RETURN_OFFSETMAX:
+                io.getOut().println("Determine offset for maximum of " + wavFile2.toString() + "..."); break;
+            case PRAAT_RETURN_OFFSETMIN:
+                io.getOut().println("Determine offset for minimum of " + wavFile2.toString() + "..."); break;
+            case PRAAT_RETURN_VALUEMAX:
+                io.getOut().println("Determine maximum value of " + wavFile2.toString() + "..."); break;
+            case PRAAT_RETURN_VALUEMIN:
+                io.getOut().println("Determine minimum value of " + wavFile2.toString() + "..."); break;
+            case PRAAT_RETURN_VALUEABSMAX:
+                io.getOut().println("Determine maximum absolut value of " + wavFile2.toString() + "..."); break;
+            default:
+                io.getOut().println("Determine offset of " + wavFile2.toString() + "..."); break;
+        }
         ProcessBuilder builder = new ProcessBuilder();
         builder.directory(new File(tempPath));
         builder.command("cmd.exe",
