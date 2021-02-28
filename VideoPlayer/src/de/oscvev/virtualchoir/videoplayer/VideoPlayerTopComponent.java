@@ -17,7 +17,6 @@ import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
 import org.openide.util.NbBundle;
 import org.openide.windows.TopComponent;
-import org.openide.util.NbBundle.Messages;
 import org.openide.util.Utilities;
 import uk.co.caprica.vlcj.BundledVLCLibsDiscoveryStrategy;
 import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
@@ -203,6 +202,8 @@ public final class VideoPlayerTopComponent extends TopComponent implements Looku
                 clipPath = temp.getVideoClipPath();
                 mediaPlayerComponent.mediaPlayer().controls().stop();
                 mediaPlayerComponent.mediaPlayer().media().startPaused(clipPath.toString());
+                //mediaPlayerComponent.mediaPlayer().controls().setPosition((float) (0.2));
+                //mediaPlayerComponent.mediaPlayer().controls().play();
             }
         }
     }

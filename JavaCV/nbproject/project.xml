@@ -11,51 +11,51 @@
             </public-packages>
             <class-path-extension>
                 <runtime-relative-path>ext/ffmpeg-windows-x86_64.jar</runtime-relative-path>
-                <binary-origin>C:\Users\Andreas\Documents\OSCVeV\Netbeans\VirtualChoir\JavaCV\release\modules\ext\ffmpeg-windows-x86_64.jar</binary-origin>
+                <binary-origin>release/modules/ext/ffmpeg-windows-x86_64.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
                 <runtime-relative-path>ext/opencv.jar</runtime-relative-path>
-                <binary-origin>C:\Users\Andreas\Documents\OSCVeV\Netbeans\VirtualChoir\JavaCV\release\modules\ext\opencv.jar</binary-origin>
+                <binary-origin>release/modules/ext/opencv.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
                 <runtime-relative-path>ext/ffmpeg.jar</runtime-relative-path>
-                <binary-origin>C:\Users\Andreas\Documents\OSCVeV\Netbeans\VirtualChoir\JavaCV\release\modules\ext\ffmpeg.jar</binary-origin>
+                <binary-origin>release/modules/ext/ffmpeg.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
                 <runtime-relative-path>ext/javacpp-windows-x86_64.jar</runtime-relative-path>
-                <binary-origin>C:\Users\Andreas\Documents\OSCVeV\Netbeans\VirtualChoir\JavaCV\release\modules\ext\javacpp-windows-x86_64.jar</binary-origin>
+                <binary-origin>release/modules/ext/javacpp-windows-x86_64.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
                 <runtime-relative-path>ext/javacv-platform.jar</runtime-relative-path>
-                <binary-origin>C:\Users\Andreas\Documents\OSCVeV\Netbeans\VirtualChoir\JavaCV\release\modules\ext\javacv-platform.jar</binary-origin>
+                <binary-origin>release/modules/ext/javacv-platform.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
                 <runtime-relative-path>ext/opencv-linux-x86_64.jar</runtime-relative-path>
-                <binary-origin>C:\Users\Andreas\Documents\OSCVeV\Netbeans\VirtualChoir\JavaCV\release\modules\ext\opencv-linux-x86_64.jar</binary-origin>
+                <binary-origin>release/modules/ext/opencv-linux-x86_64.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
                 <runtime-relative-path>ext/javacv.jar</runtime-relative-path>
-                <binary-origin>C:\Users\Andreas\Documents\OSCVeV\Netbeans\VirtualChoir\JavaCV\release\modules\ext\javacv.jar</binary-origin>
+                <binary-origin>release/modules/ext/javacv.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
                 <runtime-relative-path>ext/opencv-windows-x86_64.jar</runtime-relative-path>
-                <binary-origin>C:\Users\Andreas\Documents\OSCVeV\Netbeans\VirtualChoir\JavaCV\release\modules\ext\opencv-windows-x86_64.jar</binary-origin>
+                <binary-origin>release/modules/ext/opencv-windows-x86_64.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
                 <runtime-relative-path>ext/ffmpeg-platform.jar</runtime-relative-path>
-                <binary-origin>C:\Users\Andreas\Documents\OSCVeV\Netbeans\VirtualChoir\JavaCV\release\modules\ext\ffmpeg-platform.jar</binary-origin>
+                <binary-origin>release/modules/ext/ffmpeg-platform.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
                 <runtime-relative-path>ext/javacpp-platform.jar</runtime-relative-path>
-                <binary-origin>C:\Users\Andreas\Documents\OSCVeV\Netbeans\VirtualChoir\JavaCV\release\modules\ext\javacpp-platform.jar</binary-origin>
+                <binary-origin>release/modules/ext/javacpp-platform.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
                 <runtime-relative-path>ext/javacpp.jar</runtime-relative-path>
-                <binary-origin>C:\Users\Andreas\Documents\OSCVeV\Netbeans\VirtualChoir\JavaCV\release\modules\ext\javacpp.jar</binary-origin>
+                <binary-origin>release/modules/ext/javacpp.jar</binary-origin>
             </class-path-extension>
             <class-path-extension>
                 <runtime-relative-path>ext/opencv-platform.jar</runtime-relative-path>
-                <binary-origin>C:\Users\Andreas\Documents\OSCVeV\Netbeans\VirtualChoir\JavaCV\release\modules\ext\opencv-platform.jar</binary-origin>
+                <binary-origin>release/modules/ext/opencv-platform.jar</binary-origin>
             </class-path-extension>
         </data>
     </configuration>

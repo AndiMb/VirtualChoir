@@ -1,1 +1,15 @@
 /dist/
+/ffmpeg/build/
+/build/
+/Localization/build/
+/VideoUtilities/build/
+/Praat/build/
+/Core/build/
+/File_Support/build/
+/FileExplorer/build/
+/SplitScreenVideo/build/
+/VideoCreator/build/
+/Voices/build/
+/JavaCV/build/
+/vlcj/build/
+/VideoPlayer/build/

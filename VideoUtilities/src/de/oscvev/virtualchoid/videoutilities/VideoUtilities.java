@@ -435,7 +435,7 @@ public class VideoUtilities {
         return resultFilePath;
     }
     
-    public Path trimVideo(Path videoFile, double startTime, double duration, int width, int height){
+    public Path trimVideo(Path videoFile, double startTime, double duration, int width, int height, boolean nvidia){
         if (!checkPrerequisites()){
             return null;
         }
@@ -443,18 +443,29 @@ public class VideoUtilities {
         io.getOut().println("Trim video " + videoFile.toString() + "...");
         ProcessBuilder builder = new ProcessBuilder();
 
-        Path resultFilePath = Paths.get(tempPath + File.separator + videoFile.getFileName().toString() + "_trim.mp4");
-        builder.command(ffmpegPath,
+        Path resultFilePath = Paths.get(tempPath + File.separator + videoFile.getFileName().toString() + "_trim.mov");
+        /*builder.command(ffmpegPath,
                 "-y",
                 "-ss", Double.toString(startTime),
                 "-i", videoFile.toString(),
                 "-t", Double.toString(duration),
                 "-preset", "slow",
                 "-an",
-                //"-codec:v", "libx264",
-                "-codec:v", "h264_nvenc",
+                "-codec:v", nvidia ? "h264_nvenc" : "libx264",
                 "-pix_fmt", "yuv420p",
                 "-r", "30.00",
+                "-vf", "scale=" + Integer.toString(width) + ":" + Integer.toString(height) + ":force_original_aspect_ratio=increase,crop=" + Integer.toString(width) + ":" + Integer.toString(height),
+                resultFilePath.toString());*/
+        builder.command(ffmpegPath,
+                "-y",
+                "-ss", Double.toString(startTime),
+                "-i", videoFile.toString(),
+                "-t", Double.toString(duration),
+                "-an",
+                "-codec:v", "mjpeg",
+                "-pix_fmt", "yuvj420p",
+                "-q:v", "8",
+                "-r", "25.00",
                 "-vf", "scale=" + Integer.toString(width) + ":" + Integer.toString(height) + ":force_original_aspect_ratio=increase,crop=" + Integer.toString(width) + ":" + Integer.toString(height),
                 resultFilePath.toString());
         builder.redirectErrorStream(true);

@@ -61,6 +61,7 @@ public class VideoCreatorWizardWizardPanel1 implements WizardDescriptor.Panel<Wi
         // use wiz.getProperty to retrieve previous panel state
         component.setWorkingDirectory(NbPreferences.forModule(VideoCreatorWizardWizardPanel1.class).get("workingdirectory", ""));
         component.setClipResolution(Integer.parseInt(NbPreferences.forModule(VideoCreatorWizardWizardPanel1.class).get("clipresolution", "0")));
+        component.setUseNVidia(Boolean.parseBoolean(NbPreferences.forModule(VideoCreatorWizardWizardPanel1.class).get("usenvidia", "False")));
     }
 
     @Override
@@ -68,8 +69,10 @@ public class VideoCreatorWizardWizardPanel1 implements WizardDescriptor.Panel<Wi
         // use wiz.putProperty to remember current panel state
         wiz.putProperty("workingdirectory", getComponent().getWorkingDirectory());
         wiz.putProperty("clipresolution", getComponent().getClipResolution());
+        wiz.putProperty("usenvidia", getComponent().getUseNVidia());
         NbPreferences.forModule(VideoCreatorWizardWizardPanel1.class).put("workingdirectory", getComponent().getWorkingDirectory());
         NbPreferences.forModule(VideoCreatorWizardWizardPanel1.class).put("clipresolution", Integer.toString(getComponent().getClipResolution()));
+        NbPreferences.forModule(VideoCreatorWizardWizardPanel1.class).put("usenvidia", Boolean.toString(getComponent().getUseNVidia()));
     }
 
 }
