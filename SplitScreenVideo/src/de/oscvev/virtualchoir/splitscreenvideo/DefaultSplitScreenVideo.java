@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class DefaultSplitScreenVideo extends VirtualChoirVideo implements VideoPathProvider{
 

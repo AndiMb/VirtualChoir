@@ -23,7 +23,7 @@ import org.openide.util.WeakListeners;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class VirtualChoirVoiceNode extends AbstractNode implements PropertyChangeListener {
 

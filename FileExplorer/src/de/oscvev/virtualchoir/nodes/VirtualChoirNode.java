@@ -25,7 +25,7 @@ import org.openide.util.lookup.Lookups;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class VirtualChoirNode extends AbstractNode implements PropertyChangeListener {
 

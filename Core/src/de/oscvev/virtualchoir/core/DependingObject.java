@@ -7,7 +7,7 @@ package de.oscvev.virtualchoir.core;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public interface DependingObject {
     public void update();

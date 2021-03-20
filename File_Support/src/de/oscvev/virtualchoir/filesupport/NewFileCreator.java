@@ -21,7 +21,7 @@ import org.openide.util.NbBundle;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class NewFileCreator {
     private static AtomicInteger _integer = new AtomicInteger(0);

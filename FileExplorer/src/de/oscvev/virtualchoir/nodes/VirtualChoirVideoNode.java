@@ -20,7 +20,10 @@ import org.openide.util.Lookup;
 import org.openide.util.NbBundle;
 import org.openide.util.Utilities;
 import org.openide.util.WeakListeners;
-
+/**
+ *
+ * @author Andreas Hauffe
+ */
 public class VirtualChoirVideoNode extends AbstractNode implements PropertyChangeListener {
 
     private final VirtualChoirVideo video;

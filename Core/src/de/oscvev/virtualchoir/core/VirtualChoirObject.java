@@ -10,7 +10,7 @@ import java.beans.PropertyChangeSupport;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public abstract class VirtualChoirObject {
     

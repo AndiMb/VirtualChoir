@@ -10,7 +10,7 @@ import org.openide.util.lookup.InstanceContent;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class DynamicLookup extends AbstractLookup {
 

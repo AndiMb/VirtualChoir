@@ -18,7 +18,7 @@ import org.openide.util.lookup.Lookups;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class VirtualChoirVideosNode extends AbstractNode {
 

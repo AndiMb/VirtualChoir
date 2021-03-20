@@ -2,5 +2,5 @@ Manifest-Version: 1.0
 AutoUpdate-Show-In-Client: true
 OpenIDE-Module: de.oscvev.virtualchoir.ffmpeg/4
 OpenIDE-Module-Localizing-Bundle: de/oscvev/virtualchoir/ffmpeg/Bundle.properties
-OpenIDE-Module-Specification-Version: 4.3.1
+OpenIDE-Module-Specification-Version: 4.3.2
 

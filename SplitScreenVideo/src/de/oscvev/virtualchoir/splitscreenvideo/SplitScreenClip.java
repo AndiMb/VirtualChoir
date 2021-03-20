@@ -12,7 +12,7 @@ import java.nio.file.Path;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class SplitScreenClip extends VirtualChoirObject implements VideoPathProvider{
 

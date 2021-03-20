@@ -12,7 +12,7 @@ import org.openide.util.LookupListener;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class VirtualChoir extends VirtualChoirObject implements LookupListener{
     

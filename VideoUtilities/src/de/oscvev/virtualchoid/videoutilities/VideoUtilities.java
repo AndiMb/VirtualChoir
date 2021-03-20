@@ -24,7 +24,7 @@ import org.openide.util.Exceptions;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class VideoUtilities {
 

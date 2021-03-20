@@ -19,7 +19,7 @@ import org.w3c.dom.NodeList;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
  @ServiceProvider(service=VirtualChoirVoiceLoadSaveHook.class, position = 100)
 public class DefaultVoiceLoadSaveImpl extends VirtualChoirVoiceLoadSaveHook {

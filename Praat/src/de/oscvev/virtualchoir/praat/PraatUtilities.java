@@ -12,7 +12,7 @@ import org.openide.modules.InstalledFileLocator;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class PraatUtilities {
 

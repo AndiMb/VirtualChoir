@@ -11,7 +11,7 @@ import java.util.Objects;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class VirtualChoirVideoClip extends VirtualChoirObject implements VideoPathProvider {
     

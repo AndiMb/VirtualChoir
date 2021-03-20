@@ -21,7 +21,7 @@ import org.openide.util.lookup.Lookups;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class DefaultVideoNode extends AbstractNode {
 

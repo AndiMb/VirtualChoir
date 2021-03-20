@@ -12,7 +12,7 @@ import org.netbeans.api.progress.ProgressHandle;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class CorrelationCoefficientCalculator extends Thread {
 

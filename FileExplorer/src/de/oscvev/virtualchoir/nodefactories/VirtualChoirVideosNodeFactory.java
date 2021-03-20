@@ -23,7 +23,7 @@ import org.openide.util.LookupListener;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class VirtualChoirVideosNodeFactory extends ChildFactory<VirtualChoirVideo> implements PropertyChangeListener, LookupListener {
 

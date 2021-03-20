@@ -18,7 +18,7 @@ import org.openide.util.lookup.InstanceContent;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class VirtualChoirLookup extends AbstractLookup implements PropertyChangeListener {
     public final static String PROP_FILEOBJECT = "fileObject";

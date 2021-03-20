@@ -14,7 +14,7 @@ import org.openide.nodes.Node;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class VirtualChoirNodeFactory extends ChildFactory<String> {
 

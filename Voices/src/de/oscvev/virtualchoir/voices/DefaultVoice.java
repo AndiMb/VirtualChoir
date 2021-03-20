@@ -5,7 +5,6 @@
  */
 package de.oscvev.virtualchoir.voices;
 
-import de.oscvev.virtualchoid.videoutilities.VideoUtilities;
 import de.oscvev.virtualchoir.core.VideoPathProvider;
 import de.oscvev.virtualchoir.core.VirtualChoir;
 import de.oscvev.virtualchoir.core.VirtualChoirVideoClip;
@@ -16,7 +15,7 @@ import java.util.List;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class DefaultVoice extends VirtualChoirVoice implements VideoPathProvider{
 

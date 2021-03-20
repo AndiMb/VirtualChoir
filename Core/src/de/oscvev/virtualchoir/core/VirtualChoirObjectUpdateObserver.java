@@ -11,7 +11,7 @@ import java.util.Comparator;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class VirtualChoirObjectUpdateObserver implements Comparator<VirtualChoirObject>{
     

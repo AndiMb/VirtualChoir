@@ -19,7 +19,7 @@ import org.openide.util.LookupListener;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class VirtualChoirsNodeFactory extends ChildFactory<VirtualChoir> implements LookupListener{
 

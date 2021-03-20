@@ -13,7 +13,7 @@ import org.w3c.dom.NodeList;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public abstract class VirtualChoirVideoLoadSaveHook {
     

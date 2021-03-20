@@ -9,7 +9,7 @@ import java.nio.file.Path;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public interface VideoPathProvider {
     public Path getVideoClipPath();

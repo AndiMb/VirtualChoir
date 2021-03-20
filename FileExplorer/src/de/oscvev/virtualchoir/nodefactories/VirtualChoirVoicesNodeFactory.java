@@ -23,7 +23,7 @@ import de.oscvev.virtualchoir.nodeprovider.VirtualChoirVoiceNodeProvider;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class VirtualChoirVoicesNodeFactory extends ChildFactory<VirtualChoirVoice> implements PropertyChangeListener, LookupListener {
 

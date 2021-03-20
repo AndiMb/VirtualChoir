@@ -23,7 +23,7 @@ import org.openide.util.Exceptions;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class VideoCreator extends Thread {
 

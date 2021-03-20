@@ -16,7 +16,7 @@ import org.openide.util.WeakListeners;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public class SplitScreenClipNodeFactory extends ChildFactory<SplitScreenClip> implements PropertyChangeListener {
 

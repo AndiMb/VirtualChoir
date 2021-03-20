@@ -11,7 +11,7 @@ import org.openide.nodes.Node;
 
 /**
  *
- * @author Andreas
+ * @author Andreas Hauffe
  */
 public interface VirtualChoirVideoNodeProvider {
     
