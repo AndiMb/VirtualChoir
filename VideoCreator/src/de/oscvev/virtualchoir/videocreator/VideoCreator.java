@@ -38,7 +38,8 @@ public class VideoCreator extends Thread {
 
     private DefaultSplitScreenVideo splitScreenVideo = null;
     
-    private boolean useNVidia = false;
+    private int framerate = 25;
+    private String codec = "jmpeg";
 
     public VideoCreator(VirtualChoir virtualChoir, String workingDirectory) {
         this.virtualChoir = virtualChoir;
@@ -68,13 +69,21 @@ public class VideoCreator extends Thread {
     public void setSplitScreenVideo(DefaultSplitScreenVideo splitScreenVideo) {
         this.splitScreenVideo = splitScreenVideo;
     }
-    
-    public void setUseNvidia(boolean useNVidia){
-        this.useNVidia = useNVidia;
+
+    public int getFramerate() {
+        return framerate;
     }
-    
-    public boolean isUseNVidia(){
-        return useNVidia;
+
+    public void setFramerate(int framerate) {
+        this.framerate = framerate;
+    }
+
+    public String getCodec() {
+        return codec;
+    }
+
+    public void setCodec(String codec) {
+        this.codec = codec;
     }
 
     @Override
@@ -166,7 +175,7 @@ public class VideoCreator extends Thread {
 
                     double corrCoeff = vUtils.correlateWaves(masterWave, clipWav, master.getStartTime(), master.getEndTime(), VideoUtilities.PRAAT_RETURN_VALUEABSMAX);
 
-                    Path clipVidTrimmed = vUtils.trimVideo(clip.getPath(), startOffset + clip.getOffset(), duration, singleClipWidth, singleClipHeight, clip.getRotation(), useNVidia);
+                    Path clipVidTrimmed = vUtils.trimVideo(clip.getPath(), startOffset + clip.getOffset(), duration, singleClipWidth, singleClipHeight, clip.getRotation(), codec, framerate);
 
                     clipHash = ""
                             + clip.getUUID() + ":"

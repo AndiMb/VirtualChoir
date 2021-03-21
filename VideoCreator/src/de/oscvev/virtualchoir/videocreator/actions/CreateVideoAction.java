@@ -68,6 +68,8 @@ public class CreateVideoAction implements ActionListener {
                 export.setClipWidth(1920);
                 export.setClipHeight(1080);
             }
+            export.setCodec((String)wiz.getProperty("codec"));
+            export.setFramerate((Integer)wiz.getProperty("framerate"));
             RequestProcessor.getDefault().post(export);
         }
     }

@@ -45,12 +45,20 @@ public final class VideoCreatorWizardVisualPanel1 extends JPanel {
         jTextField1.setText(dir);
     }
     
-    public void setUseNVidia(boolean useNVidia){
-        useNVidiaCheckBox.setSelected(useNVidia);
+    public String getCodec(){
+        return (String)codecComboBox.getSelectedItem();
     }
     
-    public boolean getUseNVidia(){
-        return useNVidiaCheckBox.isSelected();
+    public void setCodec(String codec){
+        codecComboBox.setSelectedItem(codec);
+    }
+    
+    public int getFramerate(){
+        return (Integer)framerateComboBox.getSelectedItem();
+    }
+    
+    public void setFramerate(int rate){
+        framerateComboBox.setSelectedItem(rate);
     }
 
     /**
@@ -66,8 +74,10 @@ public final class VideoCreatorWizardVisualPanel1 extends JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        useNVidiaCheckBox = new javax.swing.JCheckBox();
+        jLabel4 = new javax.swing.JLabel();
+        codecComboBox = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        framerateComboBox = new javax.swing.JComboBox<>();
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(VideoCreatorWizardVisualPanel1.class, "VideoCreatorWizardVisualPanel1.jLabel1.text")); // NOI18N
 
@@ -84,9 +94,14 @@ public final class VideoCreatorWizardVisualPanel1 extends JPanel {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "automatic", "1920x1080" }));
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(VideoCreatorWizardVisualPanel1.class, "VideoCreatorWizardVisualPanel1.jLabel3.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(VideoCreatorWizardVisualPanel1.class, "VideoCreatorWizardVisualPanel1.jLabel4.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(useNVidiaCheckBox, org.openide.util.NbBundle.getMessage(VideoCreatorWizardVisualPanel1.class, "VideoCreatorWizardVisualPanel1.useNVidiaCheckBox.text")); // NOI18N
+        codecComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "mjpeg", "libx264", "h264_nvenc" }));
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel5, org.openide.util.NbBundle.getMessage(VideoCreatorWizardVisualPanel1.class, "VideoCreatorWizardVisualPanel1.jLabel5.text")); // NOI18N
+
+        framerateComboBox.setModel(new javax.swing.DefaultComboBoxModel<Integer>(new Integer[] { 24, 25, 30, 60 }));
+        framerateComboBox.setSelectedIndex(1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -95,19 +110,27 @@ public final class VideoCreatorWizardVisualPanel1 extends JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(useNVidiaCheckBox)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(codecComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(framerateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -123,11 +146,15 @@ public final class VideoCreatorWizardVisualPanel1 extends JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(useNVidiaCheckBox))
-                .addContainerGap(210, Short.MAX_VALUE))
+                    .addComponent(jLabel4)
+                    .addComponent(codecComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(framerateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(186, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -157,12 +184,14 @@ public final class VideoCreatorWizardVisualPanel1 extends JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> codecComboBox;
+    private javax.swing.JComboBox<Integer> framerateComboBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JCheckBox useNVidiaCheckBox;
     // End of variables declaration//GEN-END:variables
 }

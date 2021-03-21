@@ -61,7 +61,8 @@ public class VideoCreatorWizardWizardPanel1 implements WizardDescriptor.Panel<Wi
         // use wiz.getProperty to retrieve previous panel state
         component.setWorkingDirectory(NbPreferences.forModule(VideoCreatorWizardWizardPanel1.class).get("workingdirectory", ""));
         component.setClipResolution(Integer.parseInt(NbPreferences.forModule(VideoCreatorWizardWizardPanel1.class).get("clipresolution", "0")));
-        component.setUseNVidia(Boolean.parseBoolean(NbPreferences.forModule(VideoCreatorWizardWizardPanel1.class).get("usenvidia", "False")));
+        component.setCodec(NbPreferences.forModule(VideoCreatorWizardWizardPanel1.class).get("codec", "jmpeg"));
+        component.setFramerate(Integer.parseInt(NbPreferences.forModule(VideoCreatorWizardWizardPanel1.class).get("framerate", "25")));
     }
 
     @Override
@@ -69,10 +70,12 @@ public class VideoCreatorWizardWizardPanel1 implements WizardDescriptor.Panel<Wi
         // use wiz.putProperty to remember current panel state
         wiz.putProperty("workingdirectory", getComponent().getWorkingDirectory());
         wiz.putProperty("clipresolution", getComponent().getClipResolution());
-        wiz.putProperty("usenvidia", getComponent().getUseNVidia());
+        wiz.putProperty("codec", getComponent().getCodec());
+        wiz.putProperty("framerate", getComponent().getFramerate());
         NbPreferences.forModule(VideoCreatorWizardWizardPanel1.class).put("workingdirectory", getComponent().getWorkingDirectory());
         NbPreferences.forModule(VideoCreatorWizardWizardPanel1.class).put("clipresolution", Integer.toString(getComponent().getClipResolution()));
-        NbPreferences.forModule(VideoCreatorWizardWizardPanel1.class).put("usenvidia", Boolean.toString(getComponent().getUseNVidia()));
+        NbPreferences.forModule(VideoCreatorWizardWizardPanel1.class).put("codec",getComponent().getCodec());
+        NbPreferences.forModule(VideoCreatorWizardWizardPanel1.class).put("framerate", Integer.toString(getComponent().getFramerate()));
     }
 
 }
