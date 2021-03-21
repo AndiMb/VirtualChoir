@@ -435,7 +435,7 @@ public class VideoUtilities {
         return resultFilePath;
     }
     
-    public Path trimVideo(Path videoFile, double startTime, double duration, int width, int height, double rotAngle, boolean nvidia){
+    public Path trimVideo(Path videoFile, double startTime, double duration, int width, int height, double rotAngle, String codec, int framerate){
         if (!checkPrerequisites()){
             return null;
         }
@@ -444,18 +444,6 @@ public class VideoUtilities {
         ProcessBuilder builder = new ProcessBuilder();
 
         Path resultFilePath = Paths.get(tempPath + File.separator + videoFile.getFileName().toString() + "_trim.mov");
-        /*builder.command(ffmpegPath,
-                "-y",
-                "-ss", Double.toString(startTime),
-                "-i", videoFile.toString(),
-                "-t", Double.toString(duration),
-                "-preset", "slow",
-                "-an",
-                "-codec:v", nvidia ? "h264_nvenc" : "libx264",
-                "-pix_fmt", "yuv420p",
-                "-r", "30.00",
-                "-vf", "scale=" + Integer.toString(width) + ":" + Integer.toString(height) + ":force_original_aspect_ratio=increase,crop=" + Integer.toString(width) + ":" + Integer.toString(height),
-                resultFilePath.toString());*/
         
         String videofilter = "";
         if (rotAngle == -90.0){
@@ -465,18 +453,23 @@ public class VideoUtilities {
         }
         videofilter += "scale=" + Integer.toString(width) + ":" + Integer.toString(height) + ":force_original_aspect_ratio=increase,crop=" + Integer.toString(width) + ":" + Integer.toString(height);
         
-        builder.command(ffmpegPath,
-                "-y",
-                "-ss", Double.toString(startTime),
-                "-i", videoFile.toString(),
-                "-t", Double.toString(duration),
-                "-an",
-                "-codec:v", "mjpeg",
-                "-pix_fmt", "yuvj420p",
-                "-q:v", "8",
-                "-r", "25.00",
-                "-vf", videofilter,
-                resultFilePath.toString());
+        List<String> commandList = new ArrayList<>();
+        commandList.add(ffmpegPath);
+        commandList.add("-y");
+        commandList.add("-ss"); commandList.add(Double.toString(startTime));
+        commandList.add("-i"); commandList.add(videoFile.toString());
+        commandList.add("-t"); commandList.add(Double.toString(duration));
+        commandList.add("-an");
+        commandList.add("-codec:v"); commandList.add(codec);
+        if (codec.equals("mjpeg")){
+            commandList.add("-q:v"); commandList.add("8");
+        }
+        commandList.add("-pix_fmt"); commandList.add("yuvj420p");
+        commandList.add("-r"); commandList.add("" + framerate + ".00");
+        commandList.add("-vf"); commandList.add(videofilter);
+        commandList.add(resultFilePath.toString());
+        
+        builder.command(commandList);
         builder.redirectErrorStream(true);
         try {
             Process process = builder.start();
