@@ -166,7 +166,7 @@ public class VideoCreator extends Thread {
 
                     double corrCoeff = vUtils.correlateWaves(masterWave, clipWav, master.getStartTime(), master.getEndTime(), VideoUtilities.PRAAT_RETURN_VALUEABSMAX);
 
-                    Path clipVidTrimmed = vUtils.trimVideo(clip.getPath(), startOffset + clip.getOffset(), duration, singleClipWidth, singleClipHeight, useNVidia);
+                    Path clipVidTrimmed = vUtils.trimVideo(clip.getPath(), startOffset + clip.getOffset(), duration, singleClipWidth, singleClipHeight, clip.getRotation(), useNVidia);
 
                     clipHash = ""
                             + clip.getUUID() + ":"

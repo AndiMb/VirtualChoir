@@ -12,5 +12,8 @@ import java.nio.file.Path;
  * @author Andreas Hauffe
  */
 public interface VideoPathProvider {
+    
     public Path getVideoClipPath();
+    
+    public double getRotation();
 }

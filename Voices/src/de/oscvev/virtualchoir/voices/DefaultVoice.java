@@ -86,4 +86,9 @@ public class DefaultVoice extends VirtualChoirVoice implements VideoPathProvider
         }
         return masterFile.getPath();
     }
+
+    @Override
+    public double getRotation() {
+        return 0.0;
+    }
 }

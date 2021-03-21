@@ -124,4 +124,9 @@ public class SplitScreenClip extends VirtualChoirObject implements VideoPathProv
         this.correlationCoefficient = correlationCoefficient;
         firePropertyChange(PROP_CORRELATIONCOEFFICIENT, oldCorrelationCoefficient, correlationCoefficient);
     }
+
+    @Override
+    public double getRotation() {
+        return 0.0;
+    }
 }

@@ -97,4 +97,9 @@ public class DefaultSplitScreenVideo extends VirtualChoirVideo implements VideoP
         this.workingDirectory = workingDirectory;
         firePropertyChange(PROP_WORKINGDIRECTORY, oldWorkingDirectory, workingDirectory);
     }
+
+    @Override
+    public double getRotation() {
+        return 0.0;
+    }
 }

@@ -60,15 +60,15 @@ public final class VideoPlayerTopComponent extends TopComponent implements Looku
 
     public VideoPlayerTopComponent() {
         initComponents();
-        setName(NbBundle.getMessage(VideoPlayerTopComponent.class,"CTL_VideoPlayerTopComponent"));
-        setToolTipText(NbBundle.getMessage(VideoPlayerTopComponent.class,"HINT_VideoPlayerTopComponent"));
+        setName(NbBundle.getMessage(VideoPlayerTopComponent.class, "CTL_VideoPlayerTopComponent"));
+        setToolTipText(NbBundle.getMessage(VideoPlayerTopComponent.class, "HINT_VideoPlayerTopComponent"));
         putClientProperty(TopComponent.PROP_CLOSING_DISABLED, Boolean.TRUE);
         putClientProperty(TopComponent.PROP_DRAGGING_DISABLED, Boolean.TRUE);
         putClientProperty(TopComponent.PROP_MAXIMIZATION_DISABLED, Boolean.TRUE);
         putClientProperty(TopComponent.PROP_UNDOCKING_DISABLED, Boolean.TRUE);
         NativeDiscovery nd = new NativeDiscovery(new BundledVLCLibsDiscoveryStrategy());
-        MediaPlayerFactory factory = new MediaPlayerFactory(nd,EMBEDDED_MEDIA_PLAYER_ARGS);
-        mediaPlayerComponent = new EmbeddedMediaPlayerComponent(factory,null,null,null,null);
+        MediaPlayerFactory factory = new MediaPlayerFactory(nd, EMBEDDED_MEDIA_PLAYER_ARGS);
+        mediaPlayerComponent = new EmbeddedMediaPlayerComponent(factory, null, null, null, null);
         videoPanel.add(mediaPlayerComponent, BorderLayout.CENTER);
         mediaPlayerComponent.setPreferredSize(new Dimension(100, 100));
         mediaPlayerComponent.setMinimumSize(new Dimension(100, 100));
@@ -202,8 +202,6 @@ public final class VideoPlayerTopComponent extends TopComponent implements Looku
                 clipPath = temp.getVideoClipPath();
                 mediaPlayerComponent.mediaPlayer().controls().stop();
                 mediaPlayerComponent.mediaPlayer().media().startPaused(clipPath.toString());
-                //mediaPlayerComponent.mediaPlayer().controls().setPosition((float) (0.2));
-                //mediaPlayerComponent.mediaPlayer().controls().play();
             }
         }
     }
@@ -252,7 +250,7 @@ public final class VideoPlayerTopComponent extends TopComponent implements Looku
 
         @Override
         public void positionChanged(MediaPlayer mediaPlayer, float newPosition) {
-            progressSlider.setValue((int)(newPosition*100.0));
+            progressSlider.setValue((int) (newPosition * 100.0));
         }
 
         @Override

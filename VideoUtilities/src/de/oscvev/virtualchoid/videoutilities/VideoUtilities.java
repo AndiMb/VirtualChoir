@@ -435,7 +435,7 @@ public class VideoUtilities {
         return resultFilePath;
     }
     
-    public Path trimVideo(Path videoFile, double startTime, double duration, int width, int height, boolean nvidia){
+    public Path trimVideo(Path videoFile, double startTime, double duration, int width, int height, double rotAngle, boolean nvidia){
         if (!checkPrerequisites()){
             return null;
         }
@@ -456,6 +456,15 @@ public class VideoUtilities {
                 "-r", "30.00",
                 "-vf", "scale=" + Integer.toString(width) + ":" + Integer.toString(height) + ":force_original_aspect_ratio=increase,crop=" + Integer.toString(width) + ":" + Integer.toString(height),
                 resultFilePath.toString());*/
+        
+        String videofilter = "";
+        if (rotAngle == -90.0){
+            videofilter += "transpose=1 , ";
+        }else if (rotAngle == 90.0){
+            videofilter += "transpose=2 , ";
+        }
+        videofilter += "scale=" + Integer.toString(width) + ":" + Integer.toString(height) + ":force_original_aspect_ratio=increase,crop=" + Integer.toString(width) + ":" + Integer.toString(height);
+        
         builder.command(ffmpegPath,
                 "-y",
                 "-ss", Double.toString(startTime),
@@ -466,7 +475,7 @@ public class VideoUtilities {
                 "-pix_fmt", "yuvj420p",
                 "-q:v", "8",
                 "-r", "25.00",
-                "-vf", "scale=" + Integer.toString(width) + ":" + Integer.toString(height) + ":force_original_aspect_ratio=increase,crop=" + Integer.toString(width) + ":" + Integer.toString(height),
+                "-vf", videofilter,
                 resultFilePath.toString());
         builder.redirectErrorStream(true);
         try {

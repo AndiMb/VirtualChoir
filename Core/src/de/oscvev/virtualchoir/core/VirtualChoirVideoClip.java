@@ -59,6 +59,7 @@ public class VirtualChoirVideoClip extends VirtualChoirObject implements VideoPa
         firePropertyChange(PROP_OFFSET, oldOffset, offset);
     }
 
+    @Override
     public double getRotation() {
         return rotation;
     }
