@@ -9,12 +9,15 @@
         </folder>
     </folder>
     <folder name="Menu">
+        <file name="Edit_hidden"/>
         <folder name="File">
             <file name="Separator3.instance_hidden"/>
             <file name="org-netbeans-modules-print-action-PageSetupAction.shadow_hidden"/>
             <file name="org-netbeans-modules-print-action-PrintAction.shadow_hidden"/>
         </folder>
         <file name="GoTo_hidden"/>
+        <file name="Tools_hidden"/>
+        <file name="View_hidden"/>
         <folder name="Window">
             <file name="CloseAllButThisAction.shadow_hidden"/>
             <file name="CloseAllDocumentsAction.shadow_hidden"/>
@@ -24,8 +27,10 @@
             <file name="GroupsMenuAction.shadow_hidden"/>
             <file name="Separator3.instance_hidden"/>
             <file name="Separator4.instance_hidden"/>
+            <file name="Tools_hidden"/>
             <file name="Web_hidden"/>
             <file name="org-netbeans-core-windows-actions-ResetWindowsAction.shadow_hidden"/>
+            <file name="org-netbeans-modules-favorites-View.shadow_hidden"/>
         </folder>
     </folder>
     <folder name="Toolbars">
