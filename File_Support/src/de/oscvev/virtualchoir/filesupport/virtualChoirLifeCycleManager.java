@@ -40,7 +40,7 @@ public class virtualChoirLifeCycleManager extends LifecycleManager {
             //so that it will only be usable when the next change is made
             //to the JTextField:
             if (NotifyDescriptor.YES_OPTION.equals(result)) {
-                Action a = FileUtil.getConfigObject("Actions/File/de-elamx-filesupport-SaveAction.instance", Action.class);
+                Action a = FileUtil.getConfigObject("Actions/File/de-oscvev-virtualchoir-filesupport-actions-SaveAction.instance", Action.class);
                 if (a != null) {
                     a.actionPerformed(null);
                 }
