@@ -22,6 +22,11 @@ VirtualChoir ist ein auf der [Netbeans Platform](https://netbeans.apache.org/) u
 - verschiedene Codec einsetbar
 - alle Rohdaten sind nach dem Erstellen des Videos für eine manuelle Weiterbearbeitung verfügbar
 
+## Voraussetzung
+
+- Videoclips der einzelnen Singenden mit Audio, die sich durch FFmpeg lesen lassen, mit einer Zuordnung zur Stimmgruppe
+- je Stimmgruppe eine Masterdatei (Video+Audio oder nur Audio), wobei die Masterdateien zueinander synchron sein müssen, z.B. ein MP3-Export jeder Stimme aus den Noten
+
 ## Anleitung
 
 1. zip-Datei des Programms herunterladen
