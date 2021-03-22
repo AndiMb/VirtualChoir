@@ -113,7 +113,7 @@ public class vchDataObject extends MultiDataObject {
     private final Lookup lookup;
     private final InstanceContent lookupContents = new InstanceContent();
 
-    private static final int actSandMeshFileVersion = 1;
+    private static final int actVirtualChoirFileVersion = 1;
 
     public vchDataObject(FileObject pf, MultiFileLoader loader) throws DataObjectExistsException, IOException {
         super(pf, loader);
@@ -204,13 +204,13 @@ public class vchDataObject extends MultiDataObject {
             if (!versionString.isEmpty()) {
                 version = Integer.parseInt(versionString);
             }
-            if (version > actSandMeshFileVersion) {
+            if (version > actVirtualChoirFileVersion) {
                 DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message(NbBundle.getMessage(vchDataObject.class, "Error.wrongFileVersion"), NotifyDescriptor.ERROR_MESSAGE));
             } else {
                 if (nNode.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
-                    Element sandMeshElement = (Element) nNode;
+                    Element virtualChoirElement = (Element) nNode;
                     for (LoadSaveHook lsh : Lookup.getDefault().lookupAll(LoadSaveHook.class)) {
-                        lsh.load(sandMeshElement);
+                        lsh.load(virtualChoirElement);
                     }
                 }
             }
@@ -228,12 +228,12 @@ public class vchDataObject extends MultiDataObject {
             //Find the car node:
             org.w3c.dom.Node nNode = doc.getElementsByTagName("virtualchoir").item(0);
             Attr attr = doc.createAttribute("version");
-            attr.setValue("" + actSandMeshFileVersion);
+            attr.setValue("" + actVirtualChoirFileVersion);
             ((Element) nNode).setAttributeNode(attr);
             if (nNode.getNodeType() == org.w3c.dom.Node.ELEMENT_NODE) {
-                Element sandMeshElement = (Element) nNode;
+                Element virtualChoirElement = (Element) nNode;
                 for (LoadSaveHook lsh : Lookup.getDefault().lookupAll(LoadSaveHook.class)) {
-                    lsh.store(doc, sandMeshElement);
+                    lsh.store(doc, virtualChoirElement);
                 }
             }
 

@@ -35,10 +35,6 @@ public class virtualChoirLifeCycleManager extends LifecycleManager {
                     NotifyDescriptor.QUESTION_MESSAGE);
 
             Object result = DialogDisplayer.getDefault().notify(message);
-            //When user clicks "Yes", indicating they really want to save,
-            //we need to disable the Save action,
-            //so that it will only be usable when the next change is made
-            //to the JTextField:
             if (NotifyDescriptor.YES_OPTION.equals(result)) {
                 Action a = FileUtil.getConfigObject("Actions/File/de-oscvev-virtualchoir-filesupport-actions-SaveAction.instance", Action.class);
                 if (a != null) {
@@ -65,10 +61,6 @@ public class virtualChoirLifeCycleManager extends LifecycleManager {
 
     @Override
     public void markForRestart() throws UnsupportedOperationException {
-        /*String classLoaderName = TopSecurityManager.class.getClassLoader().getClass().getName();
-        if (!classLoaderName.endsWith(".Launcher$AppClassLoader") && !classLoaderName.endsWith(".ClassLoaders$AppClassLoader")) {   // NOI18N
-            throw new UnsupportedOperationException("not running in regular module system, cannot restart"); // NOI18N
-        }*/
         File userdir = Places.getUserDirectory();
         if (userdir == null) {
             throw new UnsupportedOperationException("no userdir"); // NOI18N
