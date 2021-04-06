@@ -30,8 +30,8 @@ VirtualChoir ist ein auf der [Netbeans Platform](https://netbeans.apache.org/) u
 ## Anleitung
 
 1. zip-Datei des Programms herunterladen
-  - [Windows](https://github.com/AndiMb/VirtualChoir/releases/download/v0.1/virtualchoir_0.1_windows.zip)
-  - [Linux](https://github.com/AndiMb/VirtualChoir/releases/download/v0.1/virtualchoir_0.1_linux.zip)
+  - [Windows](https://github.com/AndiMb/VirtualChoir/releases/download/v0.1.1/virtualchoir_0.1.1_windows.zip)
+  - [Linux](https://github.com/AndiMb/VirtualChoir/releases/download/v0.1.1/virtualchoir_0.1.1_linux.tar.gz)
 
 2. Programm öffnen
   - ausführbare Datei im "bin"-Ordner
