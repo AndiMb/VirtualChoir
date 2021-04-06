@@ -113,24 +113,17 @@ public class VideoUtilities {
         if (!checkPrerequisites() || wavFile1 == null || wavFile2 == null) {
             return Double.NaN;
         }
-        double offset = 0.0;
+        double offset;
 
         try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(praatScriptPath))) {
-            writer.write("form Cross Correlate two Sounds"); writer.newLine();
-            writer.write("  sentence Input_sound_1"); writer.newLine();
-            writer.write("  sentence Input_sound_2"); writer.newLine();
-            writer.write("  real start_time 0.0"); writer.newLine();
-            writer.write("  real end_time 60.0"); writer.newLine();
-            writer.write("endform"); writer.newLine();
-            writer.write(""); writer.newLine();
-            writer.write("Open long sound file... 'input_sound_1$'"); writer.newLine();
-            writer.write("Extract part: start_time, end_time, \"no\""); writer.newLine();
+            writer.write("Open long sound file... " + wavFile1.toString()); writer.newLine();
+            writer.write("Extract part: " + Double.toString(startTime) + ", " + Double.toString(startTime + duration) + ", \"no\""); writer.newLine();
             writer.write("Extract one channel... 1"); writer.newLine();
             writer.write("To Pitch: 0.0, 75.0, 800.0"); writer.newLine();
             writer.write("To Sound (hum)"); writer.newLine();
             writer.write("sound1 = selected(\"Sound\")"); writer.newLine();
-            writer.write("Open long sound file... 'input_sound_2$'"); writer.newLine();
-            writer.write("Extract part: start_time, end_time, \"no\""); writer.newLine();
+            writer.write("Open long sound file... " + wavFile2.toString()); writer.newLine();
+            writer.write("Extract part: " + Double.toString(startTime) + ", " + Double.toString(startTime + duration) + ", \"no\""); writer.newLine();
             writer.write("Extract one channel... 1"); writer.newLine();
             writer.write("To Pitch: 0.0, 75.0, 800.0"); writer.newLine();
             writer.write("To Sound (hum)"); writer.newLine();
@@ -144,10 +137,10 @@ public class VideoUtilities {
             writer.write("offsetMax = Get time of maximum: 0, 0, \"Sinc70\""); writer.newLine();
             writer.write("offsetMin = Get time of minimum: 0, 0, \"Sinc70\""); writer.newLine();
             writer.write(""); writer.newLine();            
-            writer.write("writeFileLine: \"" + praatResultFilePath.toString() + "\", 'valueMax'"); writer.newLine();
-            writer.write("appendFileLine: \"" + praatResultFilePath.toString() + "\", 'valueMin'"); writer.newLine();
-            writer.write("appendFileLine: \"" + praatResultFilePath.toString() + "\", 'offsetMax'"); writer.newLine();
-            writer.write("appendFileLine: \"" + praatResultFilePath.toString() + "\", 'offsetMin'"); writer.newLine();
+            writer.write("writeFileLine: \"" + praatResultFilePath + "\", 'valueMax'"); writer.newLine();
+            writer.write("appendFileLine: \"" + praatResultFilePath + "\", 'valueMin'"); writer.newLine();
+            writer.write("appendFileLine: \"" + praatResultFilePath + "\", 'offsetMax'"); writer.newLine();
+            writer.write("appendFileLine: \"" + praatResultFilePath + "\", 'offsetMin'"); writer.newLine();
             writer.close();
         } catch (IOException x) {
             System.err.format("IOException: %s%n", x);
@@ -170,14 +163,10 @@ public class VideoUtilities {
         }
         ProcessBuilder builder = new ProcessBuilder();
         builder.directory(new File(tempPath));
-        builder.command("cmd.exe",
-                "/c",
-                praatPath + " "
-                + praatScriptPath + " "
-                + "\"" + wavFile1.toString() + "\" "
-                + "\"" + wavFile2.toString() + "\" "
-                + Double.toString(startTime) + " "
-                + Double.toString(startTime + duration));
+        builder.command(
+                praatPath,
+                "--run",
+                praatScriptPath);
         builder.redirectErrorStream(true);
         try {
             Process process = builder.start();
@@ -269,14 +258,14 @@ public class VideoUtilities {
     }
     
     public Path removeOffsetFromWave(Path audioPath, double offset){
+        if (audioPath == null) {
+            return null;
+        }
         if (!checkPrerequisites()){
             return null;
         }
         Path resultFilePath = Paths.get(tempPath + File.separator + audioPath.getFileName().toString() + "_cut.wav");
         if (offset < 0.0){
-            if (audioPath == null) {
-                return null;
-            }
             
             // Stille erstellen
             InputOutput io = IOProvider.getDefault().getIO("Videoprocessing", false);
@@ -329,7 +318,7 @@ public class VideoUtilities {
                     "-y",
                     "-f", "concat",
                     "-safe", "0",
-                    "-i", ffmpegInputFilePath.toString(),
+                    "-i", ffmpegInputFilePath,
                     "-codec", "copy", 
                     resultFilePath.toString());
             builder.redirectErrorStream(true);
