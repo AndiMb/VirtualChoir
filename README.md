@@ -10,7 +10,7 @@ VirtualChoir is a program based on the [Netbeans Platform](https://netbeans.apac
   width="686">
 </p>
 
-## used Software and Libraries
+## Software and Libraries
 
 - [FFmpeg](https://www.ffmpeg.org/) - encoding of the individual clips and rendering of the entire video
 - [Praat](https://www.fon.hum.uva.nl/praat/) - Determination of the offset of the individual clips concerning the master file (syncing)
