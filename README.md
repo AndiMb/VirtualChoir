@@ -2,7 +2,7 @@
 
 [Deutsch](https://github.com/AndiMb/VirtualChoir/blob/master/LIESMICH.md)
 
-VirtualChoir is a program based on the [Netbeans Platform](https://netbeans.apache.org/) and thus on [Java](https://de.wikipedia.org/wiki/Java_(programming language)) to create split-screen videos for virtual choirs easily, quickly and without any prior knowledge.
+VirtualChoir is a program based on the [Netbeans Platform](https://netbeans.apache.org/) and thus on [Java](https://de.wikipedia.org/wiki/Java_(Programmiersprache)) to create split-screen videos for virtual choirs easily, quickly and without any prior knowledge.
 
 <p align="center">
 <img src="Resources/Screenshot.png"
